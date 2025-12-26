@@ -1,0 +1,11 @@
+#menu_mobile{border-radius: 10px 10px 0px 0px; box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;display:none;float:right;margin-top:5px; width: 100%;}
+#menu_mobile .title_menu{ background: #005228; display:inline-block;line-height:45px;text-align:left;text-indent:10px;  width: 100%;border:thin #fff solid;float:right;width:100%;position:relative;z-index:99999}
+#menu_mobile .title_menu a{color:#fff;text-transform:uppercase;font-size:17px}
+#menu_mobile .title_menu img{float:right;margin:15px}
+#menu_mobile ul{  text-align:left;display:none;list-style:none; padding: 0;}
+#menu_mobile ul ul{width:98%;padding:0 1%}
+#menu_mobile ul li{ display: inline-block; width: 100%; float: right; background:#02853D;line-height:40px;border:thin #fff solid;text-indent:10px;position:relative;padding:0 10px;text-align:left;margin-bottom:-1px; z-index:99;}
+#menu_mobile ul li ul li{background:none}
+#menu_mobile ul li a{color:#fff;font-size:14px}
+#menu_mobile .icon_show{ cursor: pointer; height:0;width:0;position:absolute;top:5px;right:10px;border-top:15px solid transparent;border-bottom:15px solid transparent;border-left:20px solid #fff;z-index:1000;transition:all .5s;-moz-transition:all .5s;-webkit-transition:all .5s;-o-transition:all .5s}
+#menu_mobile .icon_show2{-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-o-transform:rotate(90deg);transform:rotate(90deg)}

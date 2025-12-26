@@ -1,0 +1,57 @@
+@media screen and (max-width: 1199px){
+#banner .container{
+width: 100%;
+}
+}
+@media screen and (max-width: 992px){
+#menu_top>ul>li>a{
+font-size: 14px;
+}
+#top_header,
+#search{
+width: 100%;
+text-align: center;
+}
+#logo{ float: none;text-align: center; clear: both;}
+#copyright{
+text-align: center;
+}
+#copyright .pull-left,
+#copyright .pull-right{
+float: none;
+width: 100%;
+line-height: 30px;
+}
+}
+@media screen and (max-width: 780px){
+#banner_text{ display: none;}
+#logo{
+width: 100%;
+text-align: center;
+margin-bottom: 10px;
+clear: both;
+}
+#menu_top{
+display: none;
+}
+#menu_mobile{
+display: block;
+}
+#sl_duan .owl-prev,
+#sl_thumb .owl-prev{
+left: 0px;
+}
+#sl_duan .owl-next,
+#sl_thumb .owl-next{right: 0px;}
+#bottom_footer .col{width: 50%;}
+#bottom_footer .col-15{width: 50%;}
+#bottom_footer .col-25{width: 50%;}
+#bottom_footer .col:nth-child(3n){clear: both;}
+#bottom_footer .col-15:nth-child(3n){clear: both;}
+#bottom_footer .col-25:nth-child(3n){clear: both;}
+}
+@media screen and (max-width: 550px){
+#bottom_footer .col{width: 100%;}
+#bottom_footer .col-15{width: 100%;}
+#bottom_footer .col-25{width: 100%;}
+}
