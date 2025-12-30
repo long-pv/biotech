@@ -187,3 +187,18 @@ if (defined('JETPACK__VERSION')) {
 if (class_exists('WooCommerce')) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+
+// Setup theme setting page
+if (function_exists('acf_add_options_page')) {
+	$name_option = 'Theme Settings';
+	acf_add_options_page(
+		array(
+			'page_title' => $name_option,
+			'menu_title' => $name_option,
+			'menu_slug' => 'theme-settings',
+			'capability' => 'edit_posts',
+			'redirect' => false,
+			'position' => 80
+		)
+	);
+}
