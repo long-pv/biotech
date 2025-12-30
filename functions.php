@@ -13,6 +13,9 @@ if (! defined('_S_VERSION')) {
 	define('_S_VERSION', '1.0.0');
 }
 
+define('THEME_URI', get_template_directory_uri());
+define('THEME_PATH', get_template_directory());
+
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -184,75 +187,3 @@ if (defined('JETPACK__VERSION')) {
 if (class_exists('WooCommerce')) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
-
-// nhúng css vào
-/**
- * Enqueue CSS
- */
-function biotech_enqueue_styles()
-{
-
-	$css_uri = get_template_directory_uri() . '/dist/css/';
-
-	wp_enqueue_style('dashicons');
-
-	// ✅ Bootstrap CSS (BẮT BUỘC)
-	wp_enqueue_style(
-		'bootstrap',
-		$css_uri . 'bootstrap.min.css',
-		[],
-		_S_VERSION
-	);
-
-	wp_enqueue_style('cptch-stylesheet',       $css_uri . 'front_end_style.css', [], _S_VERSION);
-	wp_enqueue_style('cptch-desktop-style',     $css_uri . 'desktop_style.css', [], _S_VERSION);
-	wp_enqueue_style('contact-form-7',          $css_uri . 'styles.css', [], _S_VERSION);
-	wp_enqueue_style('wpdm-bootstrap',           $css_uri . 'bootstrap.css', [], _S_VERSION);
-	wp_enqueue_style('math-captcha-frontend',   $css_uri . 'frontend.css', [], _S_VERSION);
-	wp_enqueue_style('qts-front-styles',         $css_uri . 'qts-default.css', [], _S_VERSION);
-
-	wp_enqueue_style('font-awesome',             $css_uri . 'font-awesome.min.css', [], _S_VERSION);
-	wp_enqueue_style('menu-mobile',              $css_uri . 'menu_mobile.css', [], _S_VERSION);
-	wp_enqueue_style('style-media',               $css_uri . 'style_media.css', [], _S_VERSION);
-	wp_enqueue_style('style-custom',              $css_uri . 'style-custom.css', ['style-media'], _S_VERSION);
-	wp_enqueue_style('main-style',                $css_uri . 'style.css', [], _S_VERSION);
-	wp_enqueue_style('jssor',                     $css_uri . 'jssor.css', [], _S_VERSION);
-}
-add_action('wp_enqueue_scripts', 'biotech_enqueue_styles');
-
-/**
- * Enqueue JS
- */
-function biotech_enqueue_scripts()
-{
-
-	$js_uri = get_template_directory_uri() . '/dist/js/';
-
-	// Core
-	wp_enqueue_script('jquery');
-
-	// Libraries
-	wp_enqueue_script('jquery-form',  $js_uri . 'jquery.form.min.js', ['jquery'], _S_VERSION, true);
-	wp_enqueue_script('bootstrap',     $js_uri . 'bootstrap.min.js', ['jquery'], _S_VERSION, true);
-	wp_enqueue_script('hc-sticky',      $js_uri . 'jquery.hc-sticky.js', ['jquery'], _S_VERSION, true);
-	wp_enqueue_script('slimscroll',     $js_uri . 'jquery.slimscroll.min.js', ['jquery'], _S_VERSION, true);
-	wp_enqueue_script('owl-carousel',   $js_uri . 'owl.carousel.js', ['jquery'], _S_VERSION, true);
-	wp_enqueue_script('jssor-slider',   $js_uri . 'jssor.slider-24.1.5.min.js', [], _S_VERSION, true);
-	wp_enqueue_script('scripts-main',  $js_uri . 'scripts.js', ['jquery'], _S_VERSION, true);
-	wp_enqueue_script('postviews',     $js_uri . 'postviews-cache.js', ['jquery'], _S_VERSION, true);
-	wp_enqueue_script('gistfile',      $js_uri . 'gistfile1.js', ['jquery'], _S_VERSION, true);
-
-	// Localize
-	wp_localize_script(
-		'postviews',
-		'viewsCacheL10n',
-		[
-			'admin_ajax_url' => admin_url('admin-ajax.php'),
-			'post_id'        => get_the_ID(),
-		]
-	);
-
-	// Inline init JSSOR (SAU index.js)
-	wp_add_inline_script('index-js', 'jssor_1_slider_init();');
-}
-add_action('wp_enqueue_scripts', 'biotech_enqueue_scripts');
