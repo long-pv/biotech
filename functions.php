@@ -191,14 +191,59 @@ if (class_exists('WooCommerce')) {
 // Setup theme setting page
 if (function_exists('acf_add_options_page')) {
 	$name_option = 'Theme Settings';
-	acf_add_options_page(
-		array(
-			'page_title' => $name_option,
-			'menu_title' => $name_option,
-			'menu_slug' => 'theme-settings',
-			'capability' => 'edit_posts',
-			'redirect' => false,
-			'position' => 80
-		)
-	);
+
+	$parent = acf_add_options_page(array(
+		'page_title' => $name_option,
+		'menu_title' => $name_option,
+		'menu_slug'  => 'theme-settings',
+		'capability' => 'edit_posts',
+		'redirect'   => false,
+		'position'   => 80
+	));
+
+	// Header settings
+	acf_add_options_sub_page(array(
+		'page_title'  => 'Header Settings',
+		'menu_title'  => 'Header',
+		'parent_slug' => $parent['menu_slug'],
+	));
+
+	// Footer settings
+	acf_add_options_sub_page(array(
+		'page_title'  => 'Footer Settings',
+		'menu_title'  => 'Footer',
+		'parent_slug' => $parent['menu_slug'],
+	));
+}
+
+class Ecoba_Primary_Walker extends Walker_Nav_Menu
+{
+
+	public function start_lvl(&$output, $depth = 0, $args = null)
+	{
+		$output .= '<ul>';
+	}
+
+	public function end_lvl(&$output, $depth = 0, $args = null)
+	{
+		$output .= '</ul>';
+	}
+
+	public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0)
+	{
+
+		$classes = empty($item->classes) ? [] : (array) $item->classes;
+		$class   = esc_attr(implode(' ', $classes));
+
+		$output .= '<li class="' . $class . '">';
+
+		$output .= '<a href="' . esc_url($item->url) . '">';
+		$output .= esc_html($item->title);
+		$output .= '</a>';
+	}
+
+	public function end_el(&$output, $item, $depth = 0, $args = null)
+	{
+		$output .= '</li>';
+	}
 }
