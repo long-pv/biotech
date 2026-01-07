@@ -128,17 +128,63 @@ get_header();
 				<?php endif; ?>
 
 				<!-- PAGINATION -->
-				<div id="pagination">
-					<nav>
-						<?php
-						echo paginate_links([
-							'prev_text' => '&lt;',
-							'next_text' => '&gt;',
-						]);
-						?>
-					</nav>
-				</div>
+				<?php
+				global $wp_query;
 
+				$total_pages  = $wp_query->max_num_pages;
+				$current_page = max(1, get_query_var('paged'));
+				?>
+
+				<?php if ($total_pages > 1) : ?>
+					<div id="pagination">
+						<nav>
+							<ul class="pagination">
+
+								<!-- PREVIOUS -->
+								<?php if ($current_page > 1) : ?>
+									<li class="prev">
+										<a href="<?php echo esc_url(get_pagenum_link($current_page - 1)); ?>">‹</a>
+									</li>
+								<?php endif; ?>
+
+								<!-- CURRENT PAGE -->
+								<li class="active">
+									<span><?php echo $current_page; ?></span>
+								</li>
+
+								<?php
+								// Các trang sau (tối đa 4)
+								for ($i = $current_page + 1; $i <= min($current_page + 4, $total_pages); $i++) :
+									$class = 'after delta-' . ($i - $current_page);
+									if ($i == $total_pages) {
+										$class .= ' tail';
+									}
+								?>
+									<li class="<?php echo esc_attr($class); ?>">
+										<a href="<?php echo esc_url(get_pagenum_link($i)); ?>">
+											<?php echo $i; ?>
+										</a>
+									</li>
+								<?php endfor; ?>
+
+								<!-- NEXT -->
+								<?php if ($current_page < $total_pages) : ?>
+									<li class="next">
+										<a href="<?php echo esc_url(get_pagenum_link($current_page + 1)); ?>">›</a>
+									</li>
+								<?php endif; ?>
+
+								<!-- LAST -->
+								<?php if ($current_page < $total_pages) : ?>
+									<li class="last">
+										<a href="<?php echo esc_url(get_pagenum_link($total_pages)); ?>">»</a>
+									</li>
+								<?php endif; ?>
+
+							</ul>
+						</nav>
+					</div>
+				<?php endif; ?>
 			</div>
 
 

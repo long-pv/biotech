@@ -247,3 +247,15 @@ class Ecoba_Primary_Walker extends Walker_Nav_Menu
 		$output .= '</li>';
 	}
 }
+
+function biotech_exclude_pages_from_search($query)
+{
+	if (
+		!is_admin() &&
+		$query->is_main_query() &&
+		$query->is_search()
+	) {
+		$query->set('post_type', ['post']);
+	}
+}
+add_action('pre_get_posts', 'biotech_exclude_pages_from_search');
