@@ -259,3 +259,81 @@ function biotech_exclude_pages_from_search($query)
 	}
 }
 add_action('pre_get_posts', 'biotech_exclude_pages_from_search');
+
+function biotech_register_product_post_type()
+{
+
+	$labels = [
+		'name'               => 'Sản phẩm',
+		'singular_name'      => 'Sản phẩm',
+		'menu_name'          => 'Sản phẩm',
+		'name_admin_bar'     => 'Sản phẩm',
+		'add_new'            => 'Thêm mới',
+		'add_new_item'       => 'Thêm sản phẩm',
+		'edit_item'          => 'Sửa sản phẩm',
+		'new_item'           => 'Sản phẩm mới',
+		'view_item'          => 'Xem sản phẩm',
+		'search_items'       => 'Tìm sản phẩm',
+		'not_found'          => 'Không tìm thấy',
+		'not_found_in_trash' => 'Không có trong thùng rác',
+	];
+
+	$args = [
+		'labels'             => $labels,
+		'public'             => true,
+		'show_in_menu'       => true,
+		'menu_icon'          => 'dashicons-cart',
+		'supports'           => ['title', 'editor', 'thumbnail', 'excerpt'],
+		'has_archive'        => false,
+		'rewrite'            => [
+			'slug'       => 'san-pham',
+			'with_front' => false,
+		],
+		'menu_position'      => 6,
+		'exclude_from_search' => false,
+		'show_in_rest'       => true, // Gutenberg / REST
+	];
+
+	register_post_type('san_pham', $args);
+}
+add_action('init', 'biotech_register_product_post_type');
+
+function register_post_type_du_an()
+{
+
+	$labels = array(
+		'name'               => 'Dự án',
+		'singular_name'      => 'Dự án',
+		'menu_name'          => 'Dự án',
+		'name_admin_bar'     => 'Dự án',
+		'add_new'            => 'Thêm mới',
+		'add_new_item'       => 'Thêm dự án mới',
+		'edit_item'          => 'Sửa dự án',
+		'new_item'           => 'Dự án mới',
+		'view_item'          => 'Xem dự án',
+		'search_items'       => 'Tìm dự án',
+		'not_found'          => 'Không có dự án',
+		'not_found_in_trash' => 'Không có dự án trong thùng rác',
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'menu_position'      => 6,
+		'menu_icon'          => 'dashicons-building',
+		'supports'           => array('title', 'editor', 'thumbnail', 'excerpt'),
+		'rewrite'            => array(
+			'slug'       => 'du-an',
+			'with_front' => false,
+		),
+		'has_archive'        => false, // ❌ không dùng archive
+		'publicly_queryable' => true,
+		'exclude_from_search' => false,
+		'show_in_rest'       => true, // dùng Gutenberg nếu cần
+	);
+
+	register_post_type('du_an', $args);
+}
+add_action('init', 'register_post_type_du_an');

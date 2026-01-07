@@ -59,54 +59,55 @@ get_header();
 
 				<?php
 				$current_post_id = get_the_ID();
+				if (is_singular('post')) :
+					$args = [
+						'post_type'      => 'post',
+						'posts_per_page' => 3,
+						'post_status'    => 'publish',
+						'orderby'        => 'date',
+						'order'          => 'DESC',
+						'post__not_in'   => [$current_post_id],
+					];
 
-				$args = [
-					'post_type'      => 'post',
-					'posts_per_page' => 3,
-					'post_status'    => 'publish',
-					'orderby'        => 'date',
-					'order'          => 'DESC',
-					'post__not_in'   => [$current_post_id],
-				];
-
-				$query = new WP_Query($args);
+					$query = new WP_Query($args);
 				?>
 
-				<?php if ($query->have_posts()) : ?>
-					<div class="title3 os-tuyendart w3danima">
-						<div class="fleft">
-							<h3 style="color: #062245">
-								<?php _e('Tin tức khác', 'biotech'); ?>
-							</h3>
-						</div>
-						<br clear="all" />
-					</div>
-
-					<div class="row list1">
-						<?php while ($query->have_posts()) : $query->the_post(); ?>
-							<div class="col-xs-12 col-sm-6 col-md-4 tintuc-mobile">
-
-								<a href="<?php the_permalink(); ?>">
-									<?php if (has_post_thumbnail()) : ?>
-										<?php the_post_thumbnail('medium', ['alt' => get_the_title()]); ?>
-									<?php endif; ?>
-								</a>
-
-								<h5>
-									<a href="<?php the_permalink(); ?>">
-										<?php the_title(); ?>
-									</a>
-								</h5>
-
-								<p>
-									<?php echo wp_trim_words(get_the_excerpt(), 25, '...'); ?>
-								</p>
+					<?php if ($query->have_posts()) : ?>
+						<div class="title3 os-tuyendart w3danima">
+							<div class="fleft">
+								<h3 style="color: #062245">
+									<?php _e('Tin tức khác', 'biotech'); ?>
+								</h3>
 							</div>
-						<?php endwhile; ?>
-					</div>
-				<?php endif; ?>
+							<br clear="all" />
+						</div>
 
-				<?php wp_reset_postdata(); ?>
+						<div class="row list1">
+							<?php while ($query->have_posts()) : $query->the_post(); ?>
+								<div class="col-xs-12 col-sm-6 col-md-4 tintuc-mobile">
+
+									<a href="<?php the_permalink(); ?>">
+										<?php if (has_post_thumbnail()) : ?>
+											<?php the_post_thumbnail('medium', ['alt' => get_the_title()]); ?>
+										<?php endif; ?>
+									</a>
+
+									<h5>
+										<a href="<?php the_permalink(); ?>">
+											<?php the_title(); ?>
+										</a>
+									</h5>
+
+									<p>
+										<?php echo wp_trim_words(get_the_excerpt(), 25, '...'); ?>
+									</p>
+								</div>
+							<?php endwhile; ?>
+						</div>
+					<?php endif; ?>
+
+					<?php wp_reset_postdata(); ?>
+				<?php endif; ?>
 			</div>
 
 			<div class="col-xs-12 col-sm-3 col-md-3 col_left">
