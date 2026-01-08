@@ -337,3 +337,43 @@ function register_post_type_du_an()
 	register_post_type('du_an', $args);
 }
 add_action('init', 'register_post_type_du_an');
+
+function register_khach_hang_doi_tac_cpt()
+{
+
+	$labels = array(
+		'name'               => 'Khách hàng - Đối tác',
+		'singular_name'      => 'Khách hàng - Đối tác',
+		'menu_name'          => 'Khách hàng - Đối tác',
+		'name_admin_bar'     => 'Khách hàng - Đối tác',
+		'add_new'            => 'Thêm mới',
+		'add_new_item'       => 'Thêm khách hàng / đối tác',
+		'new_item'           => 'Khách hàng / đối tác mới',
+		'edit_item'          => 'Sửa khách hàng / đối tác',
+		'view_item'          => 'Xem',
+		'all_items'          => 'Tất cả khách hàng - đối tác',
+		'search_items'       => 'Tìm kiếm',
+		'not_found'          => 'Không có dữ liệu',
+		'not_found_in_trash' => 'Không có trong thùng rác',
+	);
+
+	$args = array(
+		'label'              => 'Khách hàng - Đối tác',
+		'labels'             => $labels,
+		'public'             => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'menu_position'      => 20,
+		'menu_icon'          => 'dashicons-groups',
+		'supports'           => array('title', 'thumbnail'),
+		'has_archive'        => false,
+		'rewrite'            => array(
+			'slug' => 'khach-hang-doi-tac',
+			'with_front' => false,
+		),
+		'show_in_rest'       => true,
+	);
+
+	register_post_type('khach_hang_doi_tac', $args);
+}
+add_action('init', 'register_khach_hang_doi_tac_cpt');
